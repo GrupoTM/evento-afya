@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Venha Conhecer o Campus Afya Jaboatão – 12 de Maio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --pink:    #E30054;
+      --pink-dk: #B5006A;
+      --purple:  #6A2080;
+      --dark:    #1a1a1a;
+      --gray:    #f2f2f2;
+      --white:   #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: var(--gray);
+      color: var(--dark);
+      min-height: 100vh;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse-ring {
+      0%   { transform: scale(1);   opacity: .7; }
+      70%  { transform: scale(1.15); opacity: 0; }
+      100% { transform: scale(1);   opacity: 0; }
+    }
+    @keyframes ticker {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes shimmer {
+      0%   { background-position: -400px 0; }
+      100% { background-position: 400px 0; }
+    }
+
+    .fade-up { animation: fadeUp .7s ease both; }
+    .delay-1 { animation-delay: .15s; }
+    .delay-2 { animation-delay: .30s; }
+    .delay-3 { animation-delay: .45s; }
+    .delay-4 { animation-delay: .60s; }
+
+    /* ── TICKER ── */
+    .ticker-wrap {
+      background: var(--pink);
+      overflow: hidden;
+      padding: 10px 0;
+    }
+    .ticker-inner {
+      display: flex;
+      width: max-content;
+      animation: ticker 22s linear infinite;
+    }
+    .ticker-item {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0 40px;
+      white-space: nowrap;
+    }
+    .ticker-dot { color: rgba(255,255,255,.5); margin: 0 6px; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--gray) 0%, #e8e8e8 100%);
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* diagonal accent */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 55%;
+      height: 100%;
+      background: linear-gradient(160deg, rgba(227,0,84,.06) 0%, rgba(106,32,128,.08) 100%);
+      clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 56px 24px 52px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      position: relative; z-index: 1;
+    }
+
+    /* left col */
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(227,0,84,.10);
+      border: 1px solid rgba(227,0,84,.25);
+      color: var(--pink);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 900;
+      color: var(--dark);
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+    .hero-title .accent { color: var(--pink); }
+
+    .hero-subtitle {
+      font-size: 15px;
+      color: #555;
+      line-height: 1.75;
+      margin-bottom: 28px;
+    }
+
+    /* date badge */
+    .date-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--white);
+      border: 2px solid var(--pink);
+      border-radius: 14px;
+      padding: 14px 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(227,0,84,.15);
+    }
+    .date-badge-icon { font-size: 28px; }
+    .date-badge-text .date-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+    .date-badge-text .date-value {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--dark);
+      line-height: 1.1;
+    }
+    .date-badge-text .date-value span { color: var(--pink); }
+
+    /* info pills */
+    .info-pills { display: flex; flex-wrap: wrap; gap: 10px; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--white);
+      border: 1.5px solid #e0e0e0;
+      border-radius: 30px;
+      padding: 7px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #333;
+    }
+    .pill .pill-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--pink);
+      flex-shrink: 0;
+    }
+
+    /* right col – card */
+    .card {
+      background: var(--white);
+      border-radius: 20px;
+      box-shadow: 0 16px 60px rgba(0,0,0,.12);
+      overflow: hidden;
+      position: relative;
+    }
+    .card-header {
+      background: linear-gradient(135deg, var(--pink) 0%, var(--pink-dk) 50%, var(--purple) 100%);
+      padding: 26px 28px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-header::before {
+      content: '';
+      position: absolute; top:0; left:0; right:0; bottom:0;
+      background-image: repeating-linear-gradient(
+        -45deg, transparent, transparent 10px,
+        rgba(255,255,255,.04) 10px, rgba(255,255,255,.04) 11px
+      );
+    }
+    .card-header-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px;
+      font-weight: 900;
+      color: #fff;
+      position: relative; z-index:1;
+      margin-bottom: 4px;
+    }
+    .card-header-sub {
+      font-size: 13px;
+      color: rgba(255,255,255,.75);
+      position: relative; z-index:1;
+    }
+
+    /* spots counter */
+    .spots-bar {
+      background: rgba(0,0,0,.15);
+      border-radius: 4px;
+      height: 6px;
+      margin-top: 14px;
+      position: relative; z-index:1;
+      overflow: hidden;
+    }
+    .spots-fill {
+      height: 100%;
+      width: 68%;
+      background: #FFD700;
+      border-radius: 4px;
+    }
+    .spots-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255,255,255,.80);
+      margin-top: 6px;
+      position: relative; z-index:1;
+    }
+
+    .card-body { padding: 28px; }
+
+    /* form styles */
+    .form-group { margin-bottom: 16px; }
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .form-input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 2px solid #e8e8e8;
+      border-radius: 10px;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 14px;
+      color: var(--dark);
+      background: #fafafa;
+      transition: border-color .2s, box-shadow .2s;
+      outline: none;
+    }
+    .form-input:focus {
+      border-color: var(--pink);
+      box-shadow: 0 0 0 3px rgba(227,0,84,.12);
+      background: #fff;
+    }
+    .form-input::placeholder { color: #aaa; }
+
+    select.form-input { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+
+    /* CTA button */
+    .btn-cta {
+      display: block;
+      width: 100%;
+      background: linear-gradient(135deg, var(--pink), var(--pink-dk));
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      text-align: center;
+      padding: 16px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 6px 22px rgba(227,0,84,.38);
+      transition: transform .15s, box-shadow .15s;
+      margin-top: 4px;
+    }
+    .btn-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(227,0,84,.45);
+    }
+    .btn-cta:active { transform: translateY(0); }
+
+    .form-disclaimer {
+      font-size: 11px;
+      color: #aaa;
+      text-align: center;
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+
+    /* ── FEATURES STRIP ── */
+    .features {
+      background: var(--white);
+      border-top: 3px solid var(--pink);
+    }
+    .features-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .feature-item { text-align: center; }
+    .feature-icon {
+      width: 54px; height: 54px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(227,0,84,.10), rgba(106,32,128,.10));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      margin: 0 auto 12px;
+    }
+    .feature-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 5px;
+    }
+    .feature-desc { font-size: 12px; color: #666; line-height: 1.55; }
+
+    /* ── PRAVALER STRIP ── */
+    .pravaler-strip {
+      background: linear-gradient(135deg, var(--pink) 0%, var(--pink-dk) 50%, var(--purple) 100%);
+      padding: 28px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .pravaler-strip::before {
+      content: '';
+      position: absolute; top:0; left:0; right:0; bottom:0;
+      background-image: repeating-linear-gradient(
+        -45deg, transparent, transparent 12px,
+        rgba(255,255,255,.03) 12px, rgba(255,255,255,.03) 13px
+      );
+    }
+    .pravaler-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      position: relative; z-index:1;
+    }
+    .pravaler-text .pravaler-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255,255,255,.70);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 4px;
+    }
+    .pravaler-text .pravaler-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 20px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.2;
+    }
+    .pravaler-badge {
+      background: #fff;
+      border-radius: 12px;
+      padding: 10px 20px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px;
+      font-weight: 900;
+      color: #f47920;
+      letter-spacing: -0.5px;
+    }
+    .pravaler-badge span { color: var(--pink); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 30px;
+      font-weight: 900;
+      color: var(--pink);
+      letter-spacing: -1px;
+      margin-bottom: 4px;
+    }
+    .footer-sub {
+      font-size: 11px;
+      color: rgba(255,255,255,.40);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .footer-text {
+      font-size: 11px;
+      color: rgba(255,255,255,.40);
+      line-height: 1.7;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 40px 20px 36px;
+      }
+      .hero::after { display: none; }
+      .features-inner { grid-template-columns: 1fr; gap: 20px; }
+      .pravaler-inner { flex-direction: column; text-align: center; }
+      .hero-title { font-size: 32px; }
+      .card { box-shadow: 0 8px 30px rgba(0,0,0,.10); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap" aria-hidden="true">
+    <div class="ticker-inner">
+      <span class="ticker-item">🩺 Medicina na Afya Jaboatão</span>
+      <span class="ticker-item"><span class="ticker-dot">✦</span> Nota MEC 5</span>
+      <span class="ticker-item"><span class="ticker-dot">✦</span> Terça-feira · 12 de Maio</span>
+      <span class="ticker-item"><span class="ticker-dot">✦</span> A partir das 14h</span>
+      <span class="ticker-item"><span class="ticker-dot">✦</span> Visita Guiada ao Campus</span>
+      <span class="ticker-item"><span class="ticker-dot">✦</span> Consultor Pravaler Presente</span>
+      <!-- duplicate for seamless loop -->
+      <span class="ticker-item">🩺 Medicina na Afya Jaboatão</span>
+      <span class="ticker-item"><span class="ticker-dot">✦</span> Nota MEC 5</span>
+      <span class="ticker-item"><span class="ticker-dot">✦</span> Terça-feira · 12 de Maio</span>
+      <span class="ticker-item"><span class="ticker-dot">✦</span> A partir das 14h</span>
+      <span class="ticker-item"><span class="ticker-dot">✦</span> Visita Guiada ao Campus</span>
+      <span class="ticker-item"><span class="ticker-dot">✦</span> Consultor Pravaler Presente</span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+
+      <!-- LEFT: info -->
+      <div>
+        <div class="hero-eyebrow fade-up">
+          <span>🏥</span> Evento exclusivo
+        </div>
+
+        <h1 class="hero-title fade-up delay-1">
+          Venha Conhecer<br>o Campus<br><span class="accent">Afya Jaboatão!</span>
+        </h1>
+
+        <p class="hero-subtitle fade-up delay-2">
+          Uma visita guiada pelo campus para conhecer nossa estrutura,
+          laboratórios de alto padrão e todas as nossas formas de financiamento.
+          Venha de perto descobrir por que a Afya é a maior referência em educação médica do Brasil.
+        </p>
+
+        <div class="date-badge fade-up delay-3">
+          <div class="date-badge-icon">📅</div>
+          <div class="date-badge-text">
+            <div class="date-label">Data do evento</div>
+            <div class="date-value">Terça-feira &nbsp;<span>12.05</span></div>
+          </div>
+        </div>
+
+        <div class="info-pills fade-up delay-4">
+          <div class="pill"><span class="pill-dot"></span> A partir das 14h</div>
+          <div class="pill"><span class="pill-dot"></span> Atendimento exclusivo</div>
+          <div class="pill"><span class="pill-dot"></span> Vagas limitadas</div>
+          <div class="pill"><span class="pill-dot"></span> Consultor Pravaler</div>
+        </div>
+      </div>
+
+      <!-- RIGHT: capture card -->
+      <div class="card fade-up delay-2">
+        <div class="card-header">
+          <div class="card-header-title">Garanta sua vaga! 🎓</div>
+          <div class="card-header-sub">Cadastro gratuito · Vagas limitadas</div>
+          <div class="spots-bar">
+            <div class="spots-fill"></div>
+          </div>
+          <div class="spots-label">⚡ Vagas preenchendo rapidamente</div>
+        </div>
+
+        <div class="card-body">
+          <form
+            id="captureForm"
+            action="https://forms.gle/iJ93Yy6sgzxmYPtb9"
+            method="GET"
+            target="_blank"
+            onsubmit="handleSubmit(event)"
+          >
+            <div class="form-group">
+              <label class="form-label" for="nome">Seu nome completo</label>
+              <input
+                class="form-input"
+                type="text"
+                id="nome"
+                name="nome"
+                placeholder="Ex: João Silva"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="telefone">WhatsApp</label>
+              <input
+                class="form-input"
+                type="tel"
+                id="telefone"
+                name="telefone"
+                placeholder="(81) 9 0000-0000"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="interesse">Forma de ingresso de interesse</label>
+              <select class="form-input" id="interesse" name="interesse">
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option>Vestibular Unificado Afya (17/05)</option>
+                <option>Nota do ENEM</option>
+                <option>Transferência Externa</option>
+                <option>Portador de Diploma (2ª Graduação)</option>
+                <option>Ainda não decidi</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn-cta">
+              ✅ Quero Garantir Minha Vaga!
+            </button>
+          </form>
+
+          <p class="form-disclaimer">
+            🔒 Seus dados estão seguros. Não enviamos spam.<br>
+            Entraremos em contato apenas sobre o evento.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="features-inner">
+      <div class="feature-item">
+        <div class="feature-icon">🏛️</div>
+        <div class="feature-title">Estrutura de Ponta</div>
+        <div class="feature-desc">Laboratórios modernos, simuladores clínicos e espaços pensados para a melhor formação médica.</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">💊</div>
+        <div class="feature-title">Imersão Clínica Real</div>
+        <div class="feature-desc">Prática em hospitais reais desde os primeiros semestres. Teoria e prática juntas desde o primeiro dia.</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">💰</div>
+        <div class="feature-title">Formas de Financiamento</div>
+        <div class="feature-desc">Consultor Pravaler presente no evento para te apresentar todas as opções disponíveis para você.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRAVALER STRIP -->
+  <div class="pravaler-strip">
+    <div class="pravaler-inner">
+      <div class="pravaler-text">
+        <div class="pravaler-label">Parceiro oficial do evento</div>
+        <div class="pravaler-title">Consultor de Financiamentos<br>Pravaler estará presente! 🤝</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="background:#fff;border-radius:14px;padding:14px 26px;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.15);">
+          <!-- Pravaler Logo SVG – fiel à marca oficial -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 52" width="170" height="46" role="img" aria-label="Pravaler logo">
+            <!-- Símbolo: retângulo laranja com chevron/seta -->
+            <rect x="0" y="0" width="38" height="52" rx="6" fill="#f47920"/>
+            <!-- chevron branco interno -->
+            <polyline points="10,14 19,26 10,38" stroke="#fff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <polyline points="20,14 29,26 20,38" stroke="rgba(255,255,255,0.55)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <!-- wordmark "pravaler" em laranja -->
+            <text x="50" y="36" font-family="'Montserrat',Arial Black,sans-serif" font-weight="900" font-size="27" fill="#f47920" letter-spacing="-0.8">pravaler</text>
+          </svg>
+        </div>
+        <div style="font-size:11px;color:rgba(255,255,255,.65);margin-top:8px;font-weight:600;">Financiamento estudantil</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Afya</div>
+    <div class="footer-sub">Faculdade de Ciências Médicas · Jaboatão dos Guararapes · PE</div>
+    <p class="footer-text">
+      Av. Barreto de Menezes, nº 738 · Piedade · Jaboatão dos Guararapes/PE<br>
+      Nota MEC 5 · Maior referência em educação médica do Brasil<br><br>
+      © 2026 Afya · Todos os direitos reservados
+    </p>
+  </footer>
+
+  <script>
+    // Smooth submit: opens Google Form in new tab and shows confirmation
+    function handleSubmit(e) {
+      e.preventDefault();
+      // open the Google Form
+      window.open('https://forms.gle/iJ93Yy6sgzxmYPtb9', '_blank');
+
+      // swap form for success message
+      const body = document.querySelector('.card-body');
+      body.innerHTML = `
+        <div style="text-align:center;padding:20px 0;">
+          <div style="font-size:56px;margin-bottom:16px;">🎉</div>
+          <div style="font-family:'Montserrat',sans-serif;font-size:20px;font-weight:900;color:#1a1a1a;margin-bottom:10px;">
+            Vaga reservada!
+          </div>
+          <div style="font-size:14px;color:#555;line-height:1.65;margin-bottom:20px;">
+            O formulário foi aberto para você completar o cadastro.<br>
+            Te esperamos na <strong style="color:#E30054;">Terça-feira, 12 de Maio</strong><br>
+            a partir das <strong>14h</strong> no campus Afya Jaboatão! 🩺
+          </div>
+          <div style="background:#f8f8f8;border-radius:12px;padding:16px;font-size:13px;color:#444;line-height:1.7;">
+            📍 <strong>Av. Barreto de Menezes, 738</strong><br>
+            Piedade · Jaboatão dos Guararapes/PE
+          </div>
+        </div>
+      `;
+    }
+
+    // Input mask for phone
+    document.getElementById('telefone').addEventListener('input', function(e) {
+      let v = e.target.value.replace(/\D/g, '');
+      if (v.length <= 11) {
+        v = v.replace(/^(\d{2})(\d)/, '($1) $2');
+        v = v.replace(/(\d{5})(\d{1,4})$/, '$1-$2');
+      }
+      e.target.value = v;
+    });
+  </script>
+
+</body>
+</html>
